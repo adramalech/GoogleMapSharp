@@ -2,16 +2,59 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace GoogleMapSharp.DistanceMatrix
 {
-    public class DistanceMatrixClient : BaseGoogleMapClient, IDistanceMatrixClient
+    public class DistanceMatrixClient : IDistanceMatrixClient, IDisposable
     {
-        private const string endPoint = "distancematrix";
+        private const string BASE_URL = @"https://maps.googleapis.com/maps/api/distancematrix/json?";
 
-        public DistanceMatrixClient(string apiKey, HttpClient client = null) : base(apiKey, endPoint, client)
+        private readonly string apiKey;
+
+        private readonly HttpClient httpClient;
+
+        public DistanceMatrixClient(string apiKey, HttpClient httpClient = null)
         {
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new ArgumentNullException(nameof(apiKey), "Unable to create client with an empty api key.");
+            }
+
+            if (httpClient != null)
+            {
+                httpClient.BaseAddress = new Uri(BASE_URL);
+                this.httpClient = httpClient;
+            }
+            else
+            {
+                this.httpClient = new HttpClient() { BaseAddress = new Uri(BASE_URL) };
+            }
         }
 
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this.httpClient.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+        }
+        #endregion
     }
 }
