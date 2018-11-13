@@ -2,7 +2,7 @@ using System;
 
 namespace GoogleMapSharp.Location
 {
-    public class GeoLocation
+    public class GeoLocation : ILocation
     {
         private const double MAX_LONGITUDE = 180.00;
         private const double MIN_LONGITUDE = -180.00;

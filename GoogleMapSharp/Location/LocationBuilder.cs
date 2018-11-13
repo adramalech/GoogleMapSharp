@@ -16,7 +16,14 @@ namespace GoogleMapSharp.Location
 
         public ILocationBuilder Append(ILocation location)
         {
-            throw new NotImplementedException();
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            this.locations.Add(location);
+
+            return this;
         }
 
         public string Build()
@@ -28,22 +35,21 @@ namespace GoogleMapSharp.Location
                 var length = this.locations.Count();
                 var markerCnt = length - 1;
 
+                output.Append(locations.First());
+
                 if (length > 1)
                 {
-                    output.Append(locations.First());
-                    markerCnt--;
-                }
-
-                this.locations.ForEach(location =>
-                {
-                    if (markerCnt >= 0)
+                    this.locations.ForEach(location =>
                     {
-                        output.Append("|");
-                        markerCnt--;
-                    }
+                        if (markerCnt >= 0)
+                        {
+                            output.Append("|");
+                            markerCnt--;
+                        }
 
-                    output.Append(location);
-                });
+                        output.Append(location);
+                    });
+                }
             }
 
             return output.ToString();
