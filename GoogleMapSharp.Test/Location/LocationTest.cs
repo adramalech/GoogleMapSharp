@@ -5,7 +5,7 @@ using Xunit;
 
 namespace GoogleMapSharp.Test.Location
 {
-    public class LocationBuilderTest
+    public class LocationTest
     {
         [Theory]
         [InlineData(80.123456, 80.123456)]
@@ -39,11 +39,10 @@ namespace GoogleMapSharp.Test.Location
         [InlineData(80.012345, -189.0001)]
         [InlineData(-81.123456, 190.00001)]
         [InlineData(-167.001234, 200.98989)]
-        public void LocationBuilder_ShouldThrowException_WhenLatLng_OutOfRange_GeoLocationAppend(double latitude, double longitude)
+        public void GeoLocationCreation_ShouldThrowException_WhenLatLng_OutOfRange(double latitude, double longitude)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => {
-                var result = new LocationBuilder().Append(new GeoLocation(latitude, longitude))
-                                                  .Build();
+                var result = new GeoLocation(latitude, longitude);
             });
         }
 
@@ -53,11 +52,10 @@ namespace GoogleMapSharp.Test.Location
         [InlineData(80.012345, -189.0001)]
         [InlineData(-81.123456, 190.00001)]
         [InlineData(-167.001234, 200.98989)]
-        public void LocationBuilder_ShouldThrowException_WhenLatLng_OutOfRange_PolyLineEncodingGeoLocation(double latitude, double longitude)
+        public void PolyLineEncodingGeoLocation_ShouldThrowException_WhenLatLng_OutOfRange(double latitude, double longitude)
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => {
-                var result = new LocationBuilder().Append(new EncodedPolylineLocation(latitude, longitude))
-                                                  .Build();
+                var result = new EncodedPolylineLocation(latitude, longitude);
             });
         }
 
@@ -68,8 +66,7 @@ namespace GoogleMapSharp.Test.Location
         public void LocationBuilder_ShouldThrowException_WhenLatLng_OutOfRange(string address)
         {
             Assert.Throws<ArgumentNullException>(() => {
-                var result = new LocationBuilder().Append(new AddressLocation(address))
-                                                  .Build();
+                var result = new AddressLocation(address);
             });
         }
     }
