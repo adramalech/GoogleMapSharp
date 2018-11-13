@@ -72,11 +72,6 @@ namespace GoogleMapSharp.Location
             return coordinate.ToString();
         }
 
-        private double toRadians(double degrees)
-        {
-            return (degrees * Math.PI) / 180;
-        }
-
         private bool isLatitudeInRange(double latitude)
         {
             return (latitude >= MIN_LATITUDE && latitude <= MAX_LATITUDE);

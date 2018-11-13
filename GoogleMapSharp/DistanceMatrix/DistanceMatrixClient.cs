@@ -21,6 +21,8 @@ namespace GoogleMapSharp.DistanceMatrix
                 throw new ArgumentNullException(nameof(apiKey), "Unable to create client with an empty api key.");
             }
 
+            this.apiKey = apiKey;
+
             if (httpClient != null)
             {
                 httpClient.BaseAddress = new Uri(BASE_URL);
