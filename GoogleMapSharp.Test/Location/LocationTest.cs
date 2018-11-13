@@ -63,10 +63,11 @@ namespace GoogleMapSharp.Test.Location
         [InlineData("")]
         [InlineData("   ")]
         [InlineData(null)]
-        public void LocationBuilder_ShouldThrowException_WhenLatLng_OutOfRange(string address)
+        public void LocationBuilder_ShouldThrowException_When_AddressIsEmpty(string address)
         {
             Assert.Throws<ArgumentNullException>(() => {
-                var result = new AddressLocation(address);
+                var result = new LocationBuilder().Append(address)
+                                                  .Build();
             });
         }
     }

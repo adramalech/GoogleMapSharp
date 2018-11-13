@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GoogleMapSharp.Location
 {
-    public class EncodedPolylineLocation : ILocation
+    public class EncodedPolylineLocation : IEncodedPolylineLocation
     {
         private const double MAX_LONGITUDE = 180.00;
         private const double MIN_LONGITUDE = -180.00;

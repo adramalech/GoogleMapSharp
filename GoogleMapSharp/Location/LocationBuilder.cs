@@ -7,21 +7,45 @@ namespace GoogleMapSharp.Location
 {
     public class LocationBuilder : ILocationBuilder
     {
-        private List<ILocation> locations;
+        private List<string> locations;
 
         public LocationBuilder()
         {
-            this.locations = new List<ILocation>();
+            this.locations = new List<string>();
         }
 
-        public ILocationBuilder Append(ILocation location)
+        public ILocationBuilder Append(string location)
+        {
+            if (string.IsNullOrEmpty(location) || string.IsNullOrWhiteSpace(location))
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            this.locations.Add(location.Trim());
+
+            return this;
+        }
+
+        public ILocationBuilder Append(IGeoLocation location)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            this.locations.Add(location);
+            this.locations.Add(location.ToString());
+
+            return this;
+        }
+
+        public ILocationBuilder Append(IEncodedPolylineLocation location)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            this.locations.Add(location.ToString());
 
             return this;
         }
