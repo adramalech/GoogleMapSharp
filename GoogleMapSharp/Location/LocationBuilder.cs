@@ -39,7 +39,7 @@ namespace GoogleMapSharp.Location
 
                 if (length > 1)
                 {
-                    this.locations.ForEach(location =>
+                    this.locations.Skip(1).ToList().ForEach(location =>
                     {
                         if (markerCnt >= 0)
                         {

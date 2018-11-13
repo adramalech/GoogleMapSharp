@@ -18,6 +18,22 @@ namespace GoogleMapSharp.Test.Location
         }
 
         [Theory]
+        [InlineData(80.123456, 80.123456)]
+        public void GenerateMultipleDestinationLocations_CheckCountOfDelimiters(double latitude, double longitude)
+        {
+            var result = new LocationBuilder().Append(new GeoLocation(80.123456, 80.123456))
+                                              .Append(new GeoLocation(80.123456, 80.123456))
+                                              .Append(new GeoLocation(80.123456, 80.123456))
+                                              .Build();
+
+            Assert.NotEmpty(result);
+
+            var len = result.Split('|').Length;
+
+            Assert.True(len == 3);
+        }
+
+        [Theory]
         [InlineData(90.00001, -160.000)]
         [InlineData(-91.0000, -120.000)]
         [InlineData(80.012345, -189.0001)]
