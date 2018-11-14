@@ -2,6 +2,7 @@ using System;
 using GoogleMapSharp;
 using GoogleMapSharp.Location;
 using Xunit;
+using Moq;
 
 namespace GoogleMapSharp.Test.Location
 {
@@ -17,9 +18,8 @@ namespace GoogleMapSharp.Test.Location
             Assert.NotEmpty(result);
         }
 
-        [Theory]
-        [InlineData(80.123456, 80.123456)]
-        public void GenerateMultipleDestinationLocations_CheckCountOfDelimiters(double latitude, double longitude)
+        [Fact]
+        public void GenerateMultipleDestinationLocations_CheckCountOfDelimiters()
         {
             var result = new LocationBuilder().Append(new GeoLocation(80.123456, 80.123456))
                                               .Append(new GeoLocation(80.123456, 80.123456))
