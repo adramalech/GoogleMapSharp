@@ -40,6 +40,7 @@ namespace GoogleMapSharp.Location
             bool hasNext;
 
             int curValue = (int)(value * 1e5);
+            
             curValue = curValue << 1;
 
             if (value < 0)
@@ -48,24 +49,24 @@ namespace GoogleMapSharp.Location
             }
 
             var nextValue = 0;
-            var encValue = 0;
+            var encodedValue = 0;
 
             do
             {
                 nextValue = (curValue >> 5);
                 hasNext = (nextValue > 0);
-                encValue = curValue & 0x1f;
+                encodedValue = curValue & 0x1f;
 
                 if (hasNext)
                 {
-                    encValue = encValue | 0x20;
+                    encodedValue = encodedValue | 0x20;
                 }
 
-                encValue = encValue + 0x3f;
+                encodedValue = encodedValue + 0x3f;
 
                 curValue = nextValue;
 
-                coordinate.Append((char)encValue);
+                coordinate.Append((char)encodedValue);
 
             } while (hasNext);
 

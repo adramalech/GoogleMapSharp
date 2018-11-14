@@ -8,7 +8,7 @@ namespace GoogleMapSharp.Geocoding
 {
   public class GeocodingClient : IGeocodingClient, IDisposable
   {
-    private const string BASE_URL = @"https://maps.googleapis.com/maps/api/geocode/json?";
+    private const string BASE_URL = @"https://maps.googleapis.com/maps/api/geocode/json";
 
     private readonly string apiKey;
 
@@ -34,8 +34,25 @@ namespace GoogleMapSharp.Geocoding
       }
     }
 
+    public Task<HttpResponseMessage> GetGeocodedLocation(IGeocodeRequest request, CancellationToken ct = default(CancellationToken))
+    {
+      if (request == null)
+      {
+        throw new ArgumentNullException(nameof(request));
+      }
 
+      return this.httpClient.GetAsync(request.ToString(), ct);
+    }
 
+    public Task<HttpResponseMessage> GetReverseGeocodedLocation(IReverseGeocodeRequest request, CancellationToken ct = default(CancellationToken))
+    {
+      if (request == null)
+      {
+        throw new ArgumentNullException(nameof(request));
+      }
+
+      return this.httpClient.GetAsync(request.ToString(), ct);
+    }
 
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls

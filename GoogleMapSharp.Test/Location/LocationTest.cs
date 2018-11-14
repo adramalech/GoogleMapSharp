@@ -41,7 +41,8 @@ namespace GoogleMapSharp.Test.Location
         [InlineData(-167.001234, 200.98989)]
         public void GeoLocationCreation_ShouldThrowException_WhenLatLng_OutOfRange(double latitude, double longitude)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => {
+            Assert.Throws<ArgumentOutOfRangeException>(() => 
+            {
                 var result = new GeoLocation(latitude, longitude);
             });
         }
@@ -54,7 +55,8 @@ namespace GoogleMapSharp.Test.Location
         [InlineData(-167.001234, 200.98989)]
         public void PolyLineEncodingGeoLocation_ShouldThrowException_WhenLatLng_OutOfRange(double latitude, double longitude)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => {
+            Assert.Throws<ArgumentOutOfRangeException>(() => 
+            {
                 var result = new EncodedPolylineLocation(latitude, longitude);
             });
         }
@@ -65,7 +67,8 @@ namespace GoogleMapSharp.Test.Location
         [InlineData(null)]
         public void LocationBuilder_ShouldThrowException_When_AddressIsEmpty(string address)
         {
-            Assert.Throws<ArgumentNullException>(() => {
+            Assert.Throws<ArgumentNullException>(() => 
+            {
                 var result = new LocationBuilder().Append(address)
                                                   .Build();
             });

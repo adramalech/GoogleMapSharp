@@ -8,7 +8,7 @@ namespace GoogleMapSharp.DistanceMatrix
 {
     public class DistanceMatrixClient : IDistanceMatrixClient, IDisposable
     {
-        private const string BASE_URL = @"https://maps.googleapis.com/maps/api/distancematrix/json?";
+        private const string BASE_URL = @"https://maps.googleapis.com/maps/api/distancematrix/json";
 
         private readonly string apiKey;
 
