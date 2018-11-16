@@ -16,7 +16,7 @@ namespace GoogleMapSharp.Location
 
         public ILocationBuilder Append(string location)
         {
-            if (string.IsNullOrEmpty(location) || string.IsNullOrWhiteSpace(location))
+            if (string.IsNullOrWhiteSpace(location))
             {
                 throw new ArgumentNullException(nameof(location));
             }
@@ -39,6 +39,18 @@ namespace GoogleMapSharp.Location
         }
 
         public ILocationBuilder Append(IEncodedPolylineLocation location)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            this.locations.Add(location.ToString());
+
+            return this;
+        }
+
+        public ILocationBuilder Append(IPlace location)
         {
             if (location == null)
             {

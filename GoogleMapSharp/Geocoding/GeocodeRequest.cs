@@ -32,7 +32,7 @@ namespace GoogleMapSharp.Geocoding
         public override string ToString()
         {
             var queryStringBuilder = new QueryBuilder();
-            
+
             queryStringBuilder.Add("key", this.apiKey);
 
             queryStringBuilder.Add("address", System.Net.WebUtility.UrlEncode(this.address));
