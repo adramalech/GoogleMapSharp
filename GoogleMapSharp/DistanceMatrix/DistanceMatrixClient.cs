@@ -10,19 +10,10 @@ namespace GoogleMapSharp.DistanceMatrix
     {
         private const string BASE_URL = @"https://maps.googleapis.com/maps/api/distancematrix/json";
 
-        private readonly string apiKey;
-
         private readonly HttpClient httpClient;
 
-        public DistanceMatrixClient(string apiKey, HttpClient httpClient = null)
+        public DistanceMatrixClient(HttpClient httpClient = null)
         {
-            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
-            {
-                throw new ArgumentNullException(nameof(apiKey), "Unable to create client with an empty api key.");
-            }
-
-            this.apiKey = apiKey;
-
             if (httpClient != null)
             {
                 httpClient.BaseAddress = new Uri(BASE_URL);
@@ -33,8 +24,6 @@ namespace GoogleMapSharp.DistanceMatrix
                 this.httpClient = new HttpClient() { BaseAddress = new Uri(BASE_URL) };
             }
         }
-
-
 
 
         #region IDisposable Support

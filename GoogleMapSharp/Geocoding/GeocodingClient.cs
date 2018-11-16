@@ -10,19 +10,10 @@ namespace GoogleMapSharp.Geocoding
   {
     private const string BASE_URL = @"https://maps.googleapis.com/maps/api/geocode/json";
 
-    private readonly string apiKey;
-
     private readonly HttpClient httpClient;
 
-    public GeocodingClient(string apiKey, HttpClient httpClient = null)
+    public GeocodingClient(HttpClient httpClient = null)
     {
-      if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
-      {
-        throw new ArgumentNullException(nameof(apiKey), "Unable to create client with an empty api key.");
-      }
-
-      this.apiKey = apiKey;
-
       if (httpClient != null)
       {
         httpClient.BaseAddress = new Uri(BASE_URL);
