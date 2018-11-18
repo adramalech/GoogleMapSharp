@@ -14,7 +14,7 @@ namespace GoogleMapSharp.Geocoding
 
         public ReverseGeocodeRequest(string apiKey, IGeoLocation latLng)
         {
-            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 throw new ArgumentNullException(nameof(apiKey));
             }
@@ -31,7 +31,7 @@ namespace GoogleMapSharp.Geocoding
         public override string ToString()
         {
             var queryStringBuilder = new QueryBuilder();
-            
+
             queryStringBuilder.Add("key", this.apiKey);
 
             queryStringBuilder.Add("latlng", this.latLng.ToString());

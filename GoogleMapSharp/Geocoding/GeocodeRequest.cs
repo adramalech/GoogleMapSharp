@@ -15,12 +15,12 @@ namespace GoogleMapSharp.Geocoding
 
         public GeocodeRequest(string apiKey, string address)
         {
-            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrWhiteSpace(apiKey))
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
                 throw new ArgumentNullException(nameof(apiKey));
             }
 
-            if (string.IsNullOrEmpty(address) || string.IsNullOrWhiteSpace(address))
+            if (string.IsNullOrWhiteSpace(address))
             {
                 throw new ArgumentNullException(nameof(address));
             }
